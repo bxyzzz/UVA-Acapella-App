@@ -88,9 +88,10 @@ class _TracksScreenState extends State<TracksScreen> {
 }
 
 class TrackWidget extends StatefulWidget {
-  final QueryDocumentSnapshot track;
+  final DocumentSnapshot track;
+  bool recordable; // you can only see mic icon if you are the owner of your own recordings
 
-  TrackWidget({Key? key, required this.track}) : super(key: key);
+  TrackWidget({Key? key, required this.track, this.recordable = true}) : super(key: key);
 
   @override
   _TrackWidgetState createState() => _TrackWidgetState();
@@ -179,18 +180,19 @@ class _TrackWidgetState extends State<TrackWidget> {
               ),
             ),
           ),
-          Expanded(
-            flex: 4, 
-            child: IconButton(
-              icon: Icon(Icons.mic, color: Colors.blue),
-              onPressed: () {
-                Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context) => RecordAudioScreen(trackId: widget.track.id)),
-                );
-              },
-            ),
-          )
+          if (widget.recordable) 
+            Expanded(
+              flex: 4, 
+              child: IconButton(
+                icon: Icon(Icons.mic, color: Colors.blue),
+                onPressed: () {
+                  Navigator.push(
+                    context, 
+                    MaterialPageRoute(builder: (context) => RecordAudioScreen(trackId: widget.track.id)),
+                  );
+                },
+              ),
+            )
         ],
       ),
     );

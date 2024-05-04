@@ -97,6 +97,7 @@ void _signInWithGoogle() async {
         password: _passwordFieldController.text,
       );
       result = "User Created!";
+      String userId = FirebaseAuth.instance.currentUser!.uid;
 
       if (credential.user != null) {
         // manually set the user id first as the identifier for the /users/ collection
@@ -111,24 +112,28 @@ void _signInWithGoogle() async {
         'name': 'Empty Track 1',
         'duration': 0,
         'trackUrl': '',
+        'userId': userId
         });
         
         await firestore.collection('users').doc(credential.user!.uid).collection('tracks').doc('track2').set({
         'name': 'Empty Track 2',
         'duration': 0,
         'trackUrl': '',
+        'userId': userId
         });
 
         await firestore.collection('users').doc(credential.user!.uid).collection('tracks').doc('track3').set({
         'name': 'Empty Track 3',
         'duration': 0,
         'trackUrl': '',
+        'userId': userId
         });
         
         await firestore.collection('users').doc(credential.user!.uid).collection('tracks').doc('track4').set({
         'name': 'Empty Track 4',
         'duration': 0,
         'trackUrl': '',
+        'userId': userId
         });
 
         result = "User Created and added to database!";
