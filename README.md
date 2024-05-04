@@ -1,6 +1,7 @@
 # acapella_app
 
-A new Flutter project.
+My attempt (bx7ugx) at a recording software app in which you can see other users tracks that they recorded (stored in Firebase Storage).
+The user should be able to record their own recordings, which will allow other users to see them too.
 
 ## Getting Started
 
